@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 const ImageSlider = () => {
@@ -24,36 +25,47 @@ const ImageSlider = () => {
     setSelectedImage(null);
   };
 
-  const images: { id: number; name: string; src: string; des: string }[] = [
+  const images: {
+    id: number;
+    name: string;
+    src: string;
+    des: string;
+    web: string;
+  }[] = [
     {
       id: 1,
-      name: "Camp",
+      name: "W Camp",
       src: "/ports/p-1.png",
       des: "NextJS + TailwindCSS + Express",
+      web: "https://wut-camp.vercel.app/",
     },
     {
       id: 2,
-      name: "Img Slider",
+      name: "Image Slider",
       src: "/ports/p-2.png",
       des: "NextJS + TailwindCSS",
+      web: "https://wuts-image-slider.vercel.app/",
     },
     {
       id: 3,
       name: "Hover Animation",
       src: "/ports/p-4.png",
       des: "NextJS + TailwindCSS + GSAP",
+      web: "",
     },
     {
       id: 4,
       name: "Hover Animation",
       src: "/ports/p-3.png",
       des: "NextJS + TailwindCSS + GSAP",
+      web: "https://wuts-hover-animation.vercel.app/",
     },
     {
       id: 5,
       name: "Go Ecommerce",
       src: "/ports/p-4.png",
       des: "NextJS + Golang(Fiber)",
+      web: "",
     },
   ];
 
@@ -173,10 +185,15 @@ const ImageSlider = () => {
               className="rounded-lg object-cover shadow-xl w-full  mb-4"
             />
 
-            <div className="ml-3">
-              <p className="text-xl font-semibold mb-1">
-                {selectedImage?.name}
-              </p>
+            <div className="mx-3">
+              <div className="flex items-center justify-between">
+                <p className="text-xl font-semibold mb-1">
+                  {selectedImage?.name}
+                </p>
+                <div className="hover:scale-110 transition-all duration-200">
+                  <Link href={selectedImage?.web}><ExternalLink /></Link>
+                </div>
+              </div>
 
               <p className="text-gray-600 mb-4">{selectedImage?.des}</p>
             </div>
