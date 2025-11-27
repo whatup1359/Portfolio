@@ -26,8 +26,9 @@ const Navbar = () => {
           </div>
 
           <div className="flex gap-x-4 items-center">
-            <p className="text-xl">About</p>/<p className="text-xl">Skill</p>/
-            <p className="text-xl">Portfolio</p>
+            <p className="cursor-pointer text-xl">About</p>/
+            <p className="cursor-pointer text-xl">Skill</p>/
+            <p className="cursor-pointer text-xl">Portfolio</p>
           </div>
         </div>
       </div>

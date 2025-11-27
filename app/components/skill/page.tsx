@@ -84,18 +84,20 @@ const Skill = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="flex items-center justify-center text-3xl gap-10 overflow-hidden"
+          className="flex items-center justify-center text-3xl gap-10 overflow-hidden mt-10 w-full"
         >
           {techStack.map((tech, index) => (
             <motion.div
-              animate={{ x: ["100%", "0%"] }}
+              animate={{ x: ["200%", "0%"] }}
               transition={{
-                repeat: Infinity,
                 ease: "linear",
                 duration: 5,
+                repeat: Infinity,
+                repeatType: "loop",
+                repeatDelay: 0,
               }}
               key={index}
-              className="flex items-center justify-center mt-10"
+              className="flex items-center justify-center"
             >
               <Image src={tech.src} alt={tech.name} width={60} height={60} />
               <span></span>
