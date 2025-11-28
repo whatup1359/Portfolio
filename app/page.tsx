@@ -33,7 +33,7 @@ const HomePage = () => {
             <div>
               <h1 className="text-5xl font-semibold">Nattawut Chanput</h1>
             </div>
-            <button className="cursor-pointer bg-black text-white px-15 py-3 rounded-full flex items-center justify-center hover:scale-110 transition-all ease-in-out duration-400">
+            <button className="cursor-pointer bg-black text-white px-15 py-3 rounded-full flex items-center justify-center hover:scale-105 transition-all ease-in-out duration-300">
               <ArrowDown className="animate-bounce" />
             </button>
           </div>
@@ -56,6 +56,7 @@ const HomePage = () => {
           </div>
         </div>
 
+        {/* -----------Skill----------- */}
         <div className="relative -z-10 bottom-65">
           <div className="absolute z-10 inset-0">
             <Skill />
@@ -71,7 +72,7 @@ const HomePage = () => {
           </div>
 
         {/* -----------Footer----------- */}
-        <div className="px-20 mt-10 z-40 w-full h-[150px]">
+        <div className="px-20 pt-10 z-40 w-full h-[150px]">
           <div>
             <div className="border" />
           </div>

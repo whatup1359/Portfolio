@@ -9,7 +9,6 @@ const ImageSlider = () => {
   const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4]);
   const [useVariant, setUseVariant] = useState<"v1" | "v2">("v1");
   const [isAnimating, setIsAnimating] = useState(false);
-  const [disableDrag, setDisableDrag] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
@@ -113,8 +112,8 @@ const ImageSlider = () => {
           return (
             <motion.img
               key={item.id}
-              drag={!disableDrag && isCenter ? "x" : false}
-              dragElastic={0.2}
+              drag={isCenter ? "x" : false}
+              dragElastic={0.25}
               dragMomentum={false}
               dragPropagation={false}
               dragConstraints={{ left: 0, right: 0 }}
@@ -122,29 +121,29 @@ const ImageSlider = () => {
               onDragEnd={(_, i) => {
                 if (i.offset.x < -50) handleNext();
                 else if (i.offset.x > 50) handlePrev();
-
-                setTimeout(() => setIsDragging(false), 50);
+                setIsDragging(false);
               }}
-              onAnimationStart={() => {
-                setIsAnimating(true);
-                setDisableDrag(true);
-              }}
+              onAnimationStart={() => setIsAnimating(true)}
               onAnimationComplete={() => {
                 setIsAnimating(false);
-                setDisableDrag(false);
               }}
               onClick={() => {
                 if (isDragging) return;
-                if (isCenter && !isAnimating) handleShowModal(item);
+                if (isAnimating) return;
+                if (isCenter) handleShowModal(item);
               }}
               src={item.src}
               alt={item.name}
-              className="cursor-pointer rounded-[12px]"
+              className="cursor-grab rounded-[12px] shadow-2xl"
               initial="center"
               animate={currentPos}
               variants={useVariant === "v1" ? imageVariants1 : imageVariants2}
               transition={{ duration: 1, ease: "easeOut" }}
-              style={{ width: "40%", position: "absolute" }}
+              style={{ 
+                width: "40%", 
+                position: "absolute",
+                pointerEvents: isAnimating ? "none" : "auto",
+              }}
             />
           );
         })}
@@ -191,7 +190,9 @@ const ImageSlider = () => {
                   {selectedImage?.name}
                 </p>
                 <div className="hover:scale-110 transition-all duration-200">
-                  <Link href={selectedImage?.web}><ExternalLink /></Link>
+                  <Link href={selectedImage?.web}>
+                    <ExternalLink />
+                  </Link>
                 </div>
               </div>
 
