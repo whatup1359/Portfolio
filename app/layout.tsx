@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={`${SourceCodePro.className} antialiased bg-neutral-50`}>
         <Navbar />
         {children}

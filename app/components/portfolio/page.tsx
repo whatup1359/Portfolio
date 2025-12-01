@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-const ImageSlider = () => {
+const Portfolio = () => {
   const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4]);
   const [useVariant, setUseVariant] = useState<"v1" | "v2">("v1");
   const [isAnimating, setIsAnimating] = useState(false);
@@ -100,8 +100,8 @@ const ImageSlider = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center h-screen w-full z-10">
-        <div className="absolute mb-[600px] text-4xl flex items-center justify-center">
+      <div id="portfolio" className="flex items-center justify-center h-screen w-full z-10">
+        <div className="absolute text-neutral-900 mb-[600px] text-4xl flex items-center justify-center">
           <p>Portfolio</p>
         </div>
 
@@ -110,41 +110,49 @@ const ImageSlider = () => {
           const isCenter = currentPos === "center";
 
           return (
-            <motion.img
+            <motion.div
               key={item.id}
-              drag={isCenter ? "x" : false}
-              dragElastic={0.25}
-              dragMomentum={false}
-              dragPropagation={false}
-              dragConstraints={{ left: 0, right: 0 }}
-              onDragStart={() => setIsDragging(true)}
-              onDragEnd={(_, i) => {
-                if (i.offset.x < -50) handleNext();
-                else if (i.offset.x > 50) handlePrev();
-                setIsDragging(false);
-              }}
-              onAnimationStart={() => setIsAnimating(true)}
-              onAnimationComplete={() => {
-                setIsAnimating(false);
-              }}
-              onClick={() => {
-                if (isDragging) return;
-                if (isAnimating) return;
-                if (isCenter) handleShowModal(item);
-              }}
-              src={item.src}
-              alt={item.name}
-              className="cursor-grab rounded-[12px] shadow-2xl"
               initial="center"
               animate={currentPos}
               variants={useVariant === "v1" ? imageVariants1 : imageVariants2}
               transition={{ duration: 1, ease: "easeOut" }}
-              style={{ 
-                width: "40%", 
+              style={{
+                width: "40%",
                 position: "absolute",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
                 pointerEvents: isAnimating ? "none" : "auto",
               }}
-            />
+            >
+              <motion.img
+                drag={isCenter ? "x" : false}
+                dragElastic={0.25}
+                dragMomentum={false}
+                dragPropagation={false}
+                dragConstraints={{ left: 0, right: 0 }}
+                onDragStart={() => setIsDragging(true)}
+                onDragEnd={(_, i) => {
+                  if (i.offset.x < -50) handleNext();
+                  else if (i.offset.x > 50) handlePrev();
+                  setIsDragging(false);
+                }}
+                onAnimationStart={() => setIsAnimating(true)}
+                onAnimationComplete={() => setIsAnimating(false)}
+                onClick={() => {
+                  if (isDragging) return;
+                  if (isAnimating) return;
+                  if (isCenter) handleShowModal(item);
+                }}
+                src={item.src}
+                alt={item.name}
+                className="cursor-grab rounded-[12px] shadow-2xl"
+              />
+
+              <p className="absolute top-1 -right-10 bg-neutral-900 text-neutral-100 px-4 py-1 font-semibold rounded-md rotate-30 shadow-lg select-none w-[200px] text-center text-xl mt-4 drop-shadow-xl">
+                {item.name}
+              </p>
+            </motion.div>
           );
         })}
 
@@ -215,4 +223,4 @@ const ImageSlider = () => {
     </>
   );
 };
-export default ImageSlider;
+export default Portfolio;

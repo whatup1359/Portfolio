@@ -1,17 +1,17 @@
-import { ArrowDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Education from "./components/education/page";
 import About from "./components/about/page";
 import Skill from "./components/skill/page";
-import ImageSlider from "./components/ImageSlider";
-
+import Portfolio from "./components/portfolio/page";
+import BackButton from "./components/backButton";
 
 const HomePage = () => {
   return (
     <>
       <div className="relative w-full h-screen">
         <div className="w-full h-[800px]">
-          <div className="relative w-full h-full rounded-b-[130px] overflow-hidden">
+          <div id="home" className="relative w-full h-full rounded-b-[130px] overflow-hidden">
             <Image
               src={"/backgrounds/concretebg2.jpg"}
               alt="concretebg"
@@ -34,12 +34,12 @@ const HomePage = () => {
               <h1 className="text-5xl font-semibold">Nattawut Chanput</h1>
             </div>
             <button className="cursor-pointer bg-black text-white px-15 py-3 rounded-full flex items-center justify-center hover:scale-105 transition-all ease-in-out duration-300">
-              <ArrowDown className="animate-bounce" />
+              <ChevronDown className="animate-bounce" />
             </button>
           </div>
         </div>
 
-        {/* -----------Education----------- */}
+        {/* -----------About----------- */}
         <div className="relative">
           <div className="absolute inset-0 z-10">
             <About />
@@ -47,6 +47,7 @@ const HomePage = () => {
           <div className="bg-neutral-100 w-full h-60 rounded-b-[130px]" />
         </div>
 
+        {/* -----------Education----------- */}
         <div className="relative w-full h-[750px]">
           <div className="absolute inset-0">
             <Education />
@@ -64,12 +65,13 @@ const HomePage = () => {
           <div className="bg-neutral-100 w-full h-60 rounded-t-[130px]" />
         </div>
 
-          <div className="relative bottom-65 w-full h-[800px] rounded-t-[130px] rounded-b-[130px] overflow-hidden">
-            <Image src={"/backgrounds/concretebg2.jpg"} alt="concretebg" fill />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <ImageSlider />
-            </div>
+        {/* -----------Portfolio----------- */}
+        <div className="relative bottom-65 w-full h-[800px] rounded-t-[130px] rounded-b-[130px] overflow-hidden">
+          <Image src={"/backgrounds/concretebg2.jpg"} alt="concretebg" fill />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Portfolio />
           </div>
+        </div>
 
         {/* -----------Footer----------- */}
         <div className="px-20 pt-10 z-40 w-full h-[150px]">
@@ -83,6 +85,11 @@ const HomePage = () => {
               <p>Privacy Policy</p>
             </div>
           </div>
+        </div>
+
+        {/* -----------BackButton----------- */}
+        <div>
+          <BackButton />
         </div>
       </div>
     </>

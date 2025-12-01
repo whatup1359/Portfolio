@@ -26,8 +26,8 @@ const techStack = [
 
 export default function Skill() {
   return (
-    <div className="w-full flex flex-col items-center justify-center py-10">
-      <div className="text-4xl flex items-center justify-center">
+    <div id="skill" className="w-full flex flex-col items-center justify-center py-10">
+      <div className="text-neutral-900 text-4xl flex items-center justify-center">
         <p>Skill</p>
         <Library size={45} className="ml-4" />
       </div>
