@@ -198,7 +198,7 @@ const Portfolio = () => {
                   {selectedImage?.name}
                 </p>
                 <div className="hover:scale-110 transition-all duration-200">
-                  <Link href={selectedImage?.web}>
+                  <Link href={selectedImage?.web} target="_blank">
                     <ExternalLink />
                   </Link>
                 </div>

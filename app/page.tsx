@@ -4,7 +4,7 @@ import Education from "./components/education/page";
 import About from "./components/about/page";
 import Skill from "./components/skill/page";
 import Portfolio from "./components/portfolio/page";
-import BackButton from "./components/backButton";
+import HomeButton from "./components/HomeButton";
 
 const HomePage = () => {
   return (
@@ -33,7 +33,7 @@ const HomePage = () => {
             <div>
               <h1 className="text-5xl font-semibold">Nattawut Chanput</h1>
             </div>
-            <button className="cursor-pointer bg-black text-white px-15 py-3 rounded-full flex items-center justify-center hover:scale-105 transition-all ease-in-out duration-300">
+            <button className="cursor-pointer bg-neutral-900 text-neutral-100 px-10 py-3 rounded-full flex items-center justify-center hover:scale-105 transition-all ease-in-out duration-300">
               <ChevronDown className="animate-bounce" />
             </button>
           </div>
@@ -87,9 +87,9 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* -----------BackButton----------- */}
+        {/* -----------HomeButton----------- */}
         <div>
-          <BackButton />
+          <HomeButton />
         </div>
       </div>
     </>

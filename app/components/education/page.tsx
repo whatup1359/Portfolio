@@ -1,4 +1,3 @@
-
 import { GraduationCap } from 'lucide-react';
 
 const Education = () => {
