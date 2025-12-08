@@ -15,7 +15,7 @@ const Education = () => {
           </div>
 
           <div className="px-140">
-            <div className="h-[1.5px] bg-linear-to-r from-neutral-900 via-neutral-100 to-neutral-900" />
+            <div className="h-[1.5px] bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full" />
           </div>
 
           <div>

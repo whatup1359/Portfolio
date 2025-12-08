@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { BriefcaseBusiness, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -103,6 +103,7 @@ const Portfolio = () => {
       <div id="portfolio" className="flex items-center justify-center h-screen w-full z-10">
         <div className="absolute text-neutral-900 mb-[600px] text-4xl flex items-center justify-center">
           <p>Portfolio</p>
+          <BriefcaseBusiness size={45} className="ml-4"/>
         </div>
 
         {images.map((item, index) => {

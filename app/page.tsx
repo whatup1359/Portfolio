@@ -5,6 +5,7 @@ import About from "./components/about/page";
 import Skill from "./components/skill/page";
 import Portfolio from "./components/portfolio/page";
 import HomeButton from "./components/HomeButton";
+import Footer from "./components/footer";
 
 const HomePage = () => {
   return (
@@ -27,7 +28,7 @@ const HomePage = () => {
                 alt="profile"
                 width={150}
                 height={150}
-                className="rounded-full flex items-center justify-center w-full h-full border-6"
+                className="rounded-full flex items-center justify-center w-full h-full border-6 border-neutral-100"
               />
             </div>
             <div>
@@ -74,17 +75,8 @@ const HomePage = () => {
         </div>
 
         {/* -----------Footer----------- */}
-        <div className="px-20 pt-10 z-40 w-full h-[150px]">
-          <div>
-            <div className="border" />
-          </div>
-          <div className="pt-10 flex items-center justify-between">
-            <p>© 2025 WutDEV All rights reserved.</p>
-            <div className="flex gap-x-8">
-              <p>Terms and Conditions</p>
-              <p>Privacy Policy</p>
-            </div>
-          </div>
+        <div>
+          <Footer />
         </div>
 
         {/* -----------HomeButton----------- */}

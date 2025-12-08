@@ -1,9 +1,9 @@
 const Footer = () => {
   return (
     <>
-      <div className="relative -bottom-200 px-20 pt-10 z-40 w-full h-[150px] bg-red-500">
+      <div className="px-20 pt-10 z-40 w-full h-[150px] text-neutral-900">
         <div>
-          <div className="border" />
+          <div className="border border-neutral-200" />
         </div>
         <div className="pt-10 flex items-center justify-between">
           <p>© 2025 WutDEV All rights reserved.</p>

@@ -50,75 +50,93 @@ const Navbar = () => {
               wut.nattawut3218@gmail.com
             </motion.p>
 
-            <motion.div
-              className="hover:shadow-xl hover:scale-105 transition-all ease-in-out duration-300"
-              variants={itemVariants}
-            >
-              <Link
-                href={"https://github.com/whatup1359"}
-                className="cursor-pointer bg-black rounded-xl overflow-hidden w-[100px] h-9 flex items-center justify-center"
-              >
-                <Image
-                  src={"/icons/github/githubicon1.png"}
-                  alt="githubicon1"
-                  width={70}
-                  height={100}
-                  className="w-max h-max"
-                />
-              </Link>
+            <motion.div variants={itemVariants}>
+              <div className="hover:shadow-xl hover:scale-105 transition-all ease-in-out duration-300">
+                <Link
+                  target="_blank"
+                  href={"https://github.com/whatup1359"}
+                  className="cursor-pointer bg-black rounded-xl overflow-hidden w-[100px] h-9 flex items-center justify-center"
+                >
+                  <Image
+                    src={"/icons/github/githubicon1.png"}
+                    alt="githubicon1"
+                    width={70}
+                    height={100}
+                    className="w-max h-max"
+                  />
+                </Link>
+              </div>
             </motion.div>
 
-            <motion.div
-              className="hover:shadow-xl hover:scale-105 transition-all ease-in-out duration-300"
-              variants={itemVariants}
-            >
-              <p className="cursor-pointer font-semibold bg-white rounded-xl overflow-hidden w-[100px] h-9 flex items-center justify-center">
-                Resume
-              </p>
+            <motion.div variants={itemVariants}>
+              <div className="hover:shadow-xl hover:scale-105 transition-all ease-in-out duration-300">
+                <Link
+                  href="/"
+                  className="cursor-pointer font-semibold bg-white rounded-xl overflow-hidden w-[100px] h-9 flex items-center justify-center"
+                >
+                  Resume
+                </Link>
+              </div>
             </motion.div>
           </motion.div>
 
           <motion.div
-            className="flex gap-x-4 items-center"
+            className="flex gap-x-3 items-center justify-center"
             transition={{ staggerChildren: 0.05, delayChildren: 0.2 }}
           >
-            <motion.p
+            <motion.div
               onClick={() => scrollToPosition(500)}
-              className="cursor-pointer text-xl hover:scale-105 transition-all ease-in-out duration-300"
               variants={itemVariants}
+              className="cursor-pointer group flex flex-col items-center justify-center px-2"
             >
-              About
-            </motion.p>
+              <motion.p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
+                About
+              </motion.p>
+
+              <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
+            </motion.div>
 
             <span className="text-xl">/</span>
 
-            <motion.p
+            <motion.div
               onClick={() => scrollToPosition(800)}
-              className="cursor-pointer text-xl hover:scale-105 transition-all ease-in-out duration-300"
               variants={itemVariants}
+              className="cursor-pointer group flex flex-col items-center justify-center px-2"
             >
-              Education
-            </motion.p>
+              <motion.p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
+                Education
+              </motion.p>
+
+              <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
+            </motion.div>
 
             <span className="text-xl">/</span>
 
-            <motion.p
+            <motion.div
               onClick={() => scrollToPosition(1200)}
-              className="cursor-pointer text-xl hover:scale-105 transition-all ease-in-out duration-300"
               variants={itemVariants}
+              className="cursor-pointer group flex flex-col items-center justify-center px-2"
             >
-              Skill
-            </motion.p>
+              <motion.p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
+                Skill
+              </motion.p>
+
+              <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
+            </motion.div>
 
             <span className="text-xl">/</span>
 
-            <motion.p
+            <motion.div
               onClick={() => scrollToPosition(1700)}
-              className="cursor-pointer text-xl hover:scale-105 transition-all ease-in-out duration-300"
               variants={itemVariants}
+              className="cursor-pointer group flex flex-col items-center justify-center px-2"
             >
-              Portfolio
-            </motion.p>
+              <motion.p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
+                Portfolio
+              </motion.p>
+
+              <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>
