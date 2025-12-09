@@ -47,10 +47,10 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      name: "Hover Animation",
+      name: "Go Ecommerce",
       src: "/ports/p-4.png",
-      des: "NextJS + TailwindCSS + GSAP",
-      web: "",
+      des: "NextJS + Golang(Fiber)",
+      web: "https://next-frontend-ecom-p0z4.onrender.com/",
     },
     {
       id: 4,
@@ -64,7 +64,7 @@ const Portfolio = () => {
       name: "Go Ecommerce",
       src: "/ports/p-4.png",
       des: "NextJS + Golang(Fiber)",
-      web: "",
+      web: "https://next-frontend-ecom-p0z4.onrender.com/",
     },
   ];
 
