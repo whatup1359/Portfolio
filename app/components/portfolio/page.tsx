@@ -47,10 +47,10 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      name: "Go Ecommerce",
-      src: "/ports/p-4.png",
-      des: "NextJS + Golang(Fiber)",
-      web: "https://next-frontend-ecom-p0z4.onrender.com/",
+      name: "Scroll Animation",
+      src: "/ports/p-5.png",
+      des: "NextJS + GSAP",
+      web: "https://w-scroll-animation.vercel.app/",
     },
     {
       id: 4,
