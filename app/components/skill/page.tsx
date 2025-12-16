@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Library } from "lucide-react";
 import Image from "next/image";
+import { variants1 } from "../motion";
 
 const techStack = [
   { id: 1, name: "HTML", src: "/icons/frontend/HTML.svg" },
@@ -26,7 +27,14 @@ const techStack = [
 
 export default function Skill() {
   return (
-    <div id="skill" className="w-full flex flex-col items-center justify-center py-10">
+    <motion.div
+      variants={variants1}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      id="skill"
+      className="w-full flex flex-col items-center justify-center py-10"
+    >
       <div className="text-neutral-900 text-4xl flex items-center justify-center">
         <p>Skill</p>
         <Library size={45} className="ml-4" />
@@ -65,6 +73,6 @@ export default function Skill() {
           ))}
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }

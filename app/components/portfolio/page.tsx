@@ -1,9 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BriefcaseBusiness, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+} from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { variants2 } from "../motion";
 
 const Portfolio = () => {
   const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4]);
@@ -100,11 +106,20 @@ const Portfolio = () => {
 
   return (
     <>
-      <div id="portfolio" className="flex items-center justify-center h-screen w-full z-10">
-        <div className="absolute text-neutral-900 mb-[600px] text-4xl flex items-center justify-center">
+      <div
+        id="portfolio"
+        className="flex items-center justify-center h-screen w-full z-10"
+      >
+        <motion.div
+          variants={variants2}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="absolute text-neutral-900 mb-[600px] text-4xl flex items-center justify-center"
+        >
           <p>Portfolio</p>
-          <BriefcaseBusiness size={45} className="ml-4"/>
-        </div>
+          <BriefcaseBusiness size={45} className="ml-4" />
+        </motion.div>
 
         {images.map((item, index) => {
           const currentPos = positions[positionIndexes[index]];
@@ -147,7 +162,7 @@ const Portfolio = () => {
                 }}
                 src={item.src}
                 alt={item.name}
-                className="cursor-grab rounded-[12px] shadow-2xl"
+                className="cursor-grab rounded-xl shadow-2xl"
               />
 
               <p className="absolute top-1 -right-10 bg-neutral-900 text-neutral-100 px-4 py-1 font-semibold rounded-md rotate-30 shadow-lg select-none w-[200px] text-center text-xl mt-4 drop-shadow-xl">

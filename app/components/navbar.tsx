@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 
-// ฟังก์ชันสำหรับเลื่อนหน้าไปยังตำแหน่งที่กำหนด
 const scrollToPosition = (y: number) => {
   window.scrollTo({
     top: y,
@@ -82,16 +81,17 @@ const Navbar = () => {
 
           <motion.div
             className="flex gap-x-3 items-center justify-center"
-            transition={{ staggerChildren: 0.05, delayChildren: 0.2 }}
+            transition={{ staggerChildren: 0.3, delayChildren: 0.2 }}
+            variants={itemVariants}
           >
             <motion.div
               onClick={() => scrollToPosition(500)}
               variants={itemVariants}
               className="cursor-pointer group flex flex-col items-center justify-center px-2"
             >
-              <motion.p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
+              <p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
                 About
-              </motion.p>
+              </p>
 
               <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
             </motion.div>
@@ -103,9 +103,9 @@ const Navbar = () => {
               variants={itemVariants}
               className="cursor-pointer group flex flex-col items-center justify-center px-2"
             >
-              <motion.p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
+              <p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
                 Education
-              </motion.p>
+              </p>
 
               <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
             </motion.div>
@@ -117,9 +117,9 @@ const Navbar = () => {
               variants={itemVariants}
               className="cursor-pointer group flex flex-col items-center justify-center px-2"
             >
-              <motion.p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
+              <p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
                 Skill
-              </motion.p>
+              </p>
 
               <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
             </motion.div>
@@ -131,9 +131,9 @@ const Navbar = () => {
               variants={itemVariants}
               className="cursor-pointer group flex flex-col items-center justify-center px-2"
             >
-              <motion.p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
+              <p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
                 Portfolio
-              </motion.p>
+              </p>
 
               <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
             </motion.div>
