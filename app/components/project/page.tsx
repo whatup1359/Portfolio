@@ -9,9 +9,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { variants2 } from "../motion";
+import { variants1, variants2 } from "../motion";
 
-const Portfolio = () => {
+const Project = () => {
   const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4]);
   const [useVariant, setUseVariant] = useState<"v1" | "v2">("v1");
   const [isAnimating, setIsAnimating] = useState(false);
@@ -117,7 +117,7 @@ const Portfolio = () => {
           viewport={{ once: true, amount: 0.1 }}
           className="absolute text-neutral-900 mb-[600px] text-4xl flex items-center justify-center"
         >
-          <p>Portfolio</p>
+          <p>Project</p>
           <BriefcaseBusiness size={45} className="ml-4" />
         </motion.div>
 
@@ -129,7 +129,8 @@ const Portfolio = () => {
             <motion.div
               key={item.id}
               initial="center"
-              animate={currentPos}
+              whileInView={currentPos}
+              viewport={{ once: true, amount: 0.1 }}
               variants={useVariant === "v1" ? imageVariants1 : imageVariants2}
               transition={{ duration: 1, ease: "easeOut" }}
               style={{
@@ -141,38 +142,44 @@ const Portfolio = () => {
                 pointerEvents: isAnimating ? "none" : "auto",
               }}
             >
-              <motion.img
-                drag={isCenter ? "x" : false}
-                dragElastic={0.25}
-                dragMomentum={false}
-                dragPropagation={false}
-                dragConstraints={{ left: 0, right: 0 }}
-                onDragStart={() => setIsDragging(true)}
-                onDragEnd={(_, i) => {
-                  if (i.offset.x < -50) handleNext();
-                  else if (i.offset.x > 50) handlePrev();
-                  setIsDragging(false);
-                }}
-                onAnimationStart={() => setIsAnimating(true)}
-                onAnimationComplete={() => setIsAnimating(false)}
-                onClick={() => {
-                  if (isDragging) return;
-                  if (isAnimating) return;
-                  if (isCenter) handleShowModal(item);
-                }}
-                src={item.src}
-                alt={item.name}
-                className="cursor-grab rounded-xl shadow-2xl"
-              />
-
-              <p className="absolute top-1 -right-10 bg-neutral-900 text-neutral-100 px-4 py-1 font-semibold rounded-md rotate-30 shadow-lg select-none w-[200px] text-center text-xl mt-4 drop-shadow-xl">
-                {item.name}
-              </p>
+              <div>
+                <motion.img
+                  drag={isCenter ? "x" : false}
+                  dragElastic={0.25}
+                  dragMomentum={false}
+                  dragPropagation={false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  onDragStart={() => setIsDragging(true)}
+                  onDragEnd={(_, i) => {
+                    if (i.offset.x < -50) handleNext();
+                    else if (i.offset.x > 50) handlePrev();
+                    setIsDragging(false);
+                  }}
+                  onAnimationStart={() => setIsAnimating(true)}
+                  onAnimationComplete={() => setIsAnimating(false)}
+                  onClick={() => {
+                    if (isDragging) return;
+                    if (isAnimating) return;
+                    if (isCenter) handleShowModal(item);
+                  }}
+                  src={item.src}
+                  alt={item.name}
+                  className="relative cursor-grab rounded-xl shadow-2xl"
+                />
+                <p className="absolute top-1 -right-10 bg-neutral-900 text-neutral-100 px-4 py-1 font-semibold rounded-md rotate-30 shadow-lg select-none w-[200px] text-center text-xl mt-4 drop-shadow-xl">
+                  {item.name}
+                </p>
+              </div>
             </motion.div>
           );
         })}
 
-        <div className="mt-[600px] flex items-center justify-between w-[100px]">
+        <motion.div 
+        variants={variants1}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        className="mt-[600px] flex items-center justify-between w-[100px]">
           <motion.button
             whileTap={{ scale: 0.85 }}
             onClick={handlePrev}
@@ -187,9 +194,10 @@ const Portfolio = () => {
           >
             <ChevronRight size={30} />
           </motion.button>
-        </div>
+        </motion.div>
       </div>
 
+      {/* -----------Modal----------- */}
       {showModal && (
         <div
           className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-100"
@@ -239,4 +247,4 @@ const Portfolio = () => {
     </>
   );
 };
-export default Portfolio;
+export default Project;

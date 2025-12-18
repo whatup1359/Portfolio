@@ -1,23 +1,28 @@
+"use client"
+
 import { User } from "lucide-react";
+import { motion } from 'framer-motion';
 
 const About = () => {
   return (
     <>
-      <div>
+      <motion.div
+      initial={{ scale: 0.9, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ delay: 0.5, duration: 0.5 }}
+      >
         <div
           id="about"
           className="flex items-center justify-center w-full py-10"
         >
           <p className="text-4xl text-center">About</p>
-          <User size={40} className="ml-4"/>
+          <User size={40} className="ml-4" />
         </div>
         <p className="text-center text-balance">
-          I started my software journey from photography. Through that, I
-          learned to love the process of creating from scratch. Since then, this
-          has led me to software development as it fulfills my love for learning
-          and building things
+          A web developer passionate about learning and development, easily connects with others, adapt quickly to new environments and desire to apply skills to the development team, committed to contributing modern websites and driving technological growth within the organization.
         </p>
-      </div>
+      </motion.div>
     </>
   );
 };

@@ -132,7 +132,7 @@ const Navbar = () => {
               className="cursor-pointer group flex flex-col items-center justify-center px-2"
             >
               <p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
-                Portfolio
+                Project
               </p>
 
               <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
