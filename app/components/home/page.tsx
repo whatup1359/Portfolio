@@ -5,6 +5,13 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { variants1, variants2 } from "../motion";
 
+const scrollToPosition = (y: number) => {
+  window.scrollTo({
+    top: y,
+    behavior: "smooth",
+  });
+};
+
 const Home = () => {
   return (
     <>
@@ -35,7 +42,10 @@ const Home = () => {
           <div>
             <h1 className="text-5xl font-semibold">Nattawut Chanput</h1>
           </div>
-          <button className="cursor-pointer bg-neutral-900 text-neutral-100 px-10 py-3 rounded-full flex items-center justify-center hover:scale-105 transition-all ease-in-out duration-300">
+          <button
+            onClick={() => scrollToPosition(500)}
+            className="cursor-pointer bg-neutral-900 text-neutral-100 px-10 py-3 rounded-full flex items-center justify-center hover:scale-105 transition-all ease-in-out duration-300"
+          >
             <ChevronDown className="animate-bounce" />
           </button>
         </motion.div>

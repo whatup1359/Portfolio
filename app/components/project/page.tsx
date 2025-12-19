@@ -41,7 +41,7 @@ const Project = () => {
       id: 1,
       name: "W Camp",
       src: "/ports/p-1.png",
-      des: "NextJS + TailwindCSS + Express",
+      des: "NextJS + TailwindCSS + Supabase",
       web: "https://wut-camp.vercel.app/",
     },
     {
@@ -69,7 +69,7 @@ const Project = () => {
       id: 5,
       name: "Go Ecommerce",
       src: "/ports/p-4.png",
-      des: "NextJS + Golang(Fiber)",
+      des: "NextJS + Golang(Fiber) + PostgreSQL",
       web: "https://next-frontend-ecom-p0z4.onrender.com/",
     },
   ];

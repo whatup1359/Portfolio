@@ -2,7 +2,7 @@
 
 import { GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
-import { itemVariants, variants1, variants2 } from "../motion";
+import { variants1, variants2 } from "../motion";
 
 const Education = () => {
   return (
@@ -29,8 +29,8 @@ const Education = () => {
           viewport={{ once: true, amount: 0.1 }}
         >
           <div className="flex justify-between px-150 mt-15 mb-5">
-            <span>2015-2018</span>
-            <span>2019-2022</span>
+            <span>2016-2019</span>
+            <span>2020-2023</span>
           </div>
 
           <div className="px-140">
@@ -41,8 +41,8 @@ const Education = () => {
             <div className="flex justify-between px-130 mt-5">
               <div className="space-y-1">
                 <ul className="text-3xl mb-4">High School</ul>
-                <li>Suankularb Wittayalai Thonburi School</li>
-                <li>English & Japanese Program</li>
+                <li>Suankularb Wittayalai Thonburi</li>
+                <li>Arts-Japanese Program</li>
               </div>
 
               <div className="space-y-1">
