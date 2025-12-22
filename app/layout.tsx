@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${SourceCodePro.className} antialiased bg-neutral-50`}>
+      <body className={`${SourceCodePro.className} antialiased bg-neutral-100`}>
         <Navbar />
         {children}
       </body>

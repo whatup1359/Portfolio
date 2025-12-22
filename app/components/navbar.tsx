@@ -70,7 +70,7 @@ const Navbar = () => {
             <motion.div variants={itemVariants}>
               <div className="hover:shadow-xl hover:scale-105 transition-all ease-in-out duration-300">
                 <Link
-                  href="/"
+                  href="https://drive.google.com/file/d/1r2IXvDEwviSAFYJQDzVvdpMaRBghGyCl/view?usp=sharing"
                   className="cursor-pointer font-semibold bg-white rounded-xl overflow-hidden w-[100px] h-9 flex items-center justify-center"
                 >
                   Resume

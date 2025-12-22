@@ -237,7 +237,7 @@ const Project = () => {
                 transition: { type: "spring", stiffness: 500, damping: 20 },
               }}
               onClick={handleCloseModal}
-              className="cursor-pointer w-full bg-black text-white py-2 rounded-lg mt-2 transition-transform duration-initial"
+              className="cursor-pointer w-full bg-neutral-900 text-neutral-100 hover:scale-101 py-2 rounded-lg mt-2 transition-transform ease-in-out duration-200"
             >
               Close
             </motion.button>
