@@ -39,7 +39,7 @@ const Home = () => {
           viewport={{ once: true, amount: 0.5 }}
           className="flex flex-col items-center justify-center space-y-10"
         >
-          <div>
+          <div className="text-center">
             <h1 className="text-5xl font-semibold">Nattawut Chanput</h1>
           </div>
           <button

@@ -42,13 +42,13 @@ const HomePage = () => {
           <div className="absolute inset-0">
             <Education />
           </div>
-          <div className="relative -z-10 bottom-35 h-full w-full overflow-hidden">
+          <div className="relative -z-10 bottom-35 h-[950px] xl:h-[800px] lg:h-[800px] md:h-[800px] w-full overflow-hidden">
             <Image src={"/backgrounds/concretebg2.jpg"} alt="concretebg" fill />
           </div>
         </div>
 
         {/* -----------Skill----------- */}
-        <div className="relative -z-10 bottom-65">
+        <div className="relative -z-10 bottom-25 xl:bottom-65 lg:bottom-65 md:bottom-65">
           <div className="absolute z-10 inset-0">
             <Skill />
           </div>
@@ -56,7 +56,7 @@ const HomePage = () => {
         </div>
 
         {/* -----------Project----------- */}
-        <div className="relative bottom-65 w-full h-[800px] rounded-t-[130px] rounded-b-[130px] overflow-hidden">
+        <div className="relative bottom-25 xl:bottom-65 lg:bottom-65 md:bottom-65 w-full h-[800px] rounded-t-[130px] rounded-b-[130px] overflow-hidden">
           <Image src={"/backgrounds/concretebg2.jpg"} alt="concretebg" fill />
           <div className="absolute inset-0 flex items-center justify-center">
             <Project />
