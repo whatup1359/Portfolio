@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 const scrollToPosition = (y: number) => {
   window.scrollTo({
@@ -31,21 +33,68 @@ const itemVariants = {
   visible: { y: 0, opacity: 1 },
 };
 
+const mobileMenuVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: -10,
+    scale: 0.95,
+    transition: {
+      duration: 0.2,
+      when: "afterChildren",
+    },
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 25,
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -10,
+    scale: 0.95,
+    transition: {
+      duration: 0.2,
+      when: "afterChildren",
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+    },
+  },
+};
+
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navLinks = [
+    { name: "About", pos: 500 },
+    { name: "Education", pos: 800 },
+    { name: "Skill", pos: 1200 },
+    { name: "Project", pos: 1700 },
+  ];
+
   return (
     <>
       <motion.div
-        className="absolute flex-1 z-40 w-full"
+        className="absolute flex z-40 w-full"
         variants={navbarVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="flex items-center justify-between mt-10 mx-25">
+        <div className="w-full flex items-center justify-between px-10 py-10 xl:px-25 lg:px-12 md:px-6">
           <motion.div
             className="flex gap-x-4 items-center"
             transition={{ staggerChildren: 0.07 }}
           >
-            <motion.p className="font-semibold" variants={itemVariants}>
+            <motion.p
+              className="font-semibold hidden xl:block"
+              variants={itemVariants}
+            >
               wut.nattawut3218@gmail.com
             </motion.p>
 
@@ -72,7 +121,7 @@ const Navbar = () => {
                 <Link
                   target="_blank"
                   href="https://drive.google.com/file/d/1r2IXvDEwviSAFYJQDzVvdpMaRBghGyCl/view?usp=sharing"
-                  className="cursor-pointer font-semibold bg-white rounded-xl overflow-hidden w-[100px] h-9 flex items-center justify-center"
+                  className="cursor-pointer font-semibold bg-neutral-100 text-neutral-900 rounded-xl overflow-hidden w-[100px] h-9 flex items-center justify-center"
                 >
                   Resume
                 </Link>
@@ -85,59 +134,62 @@ const Navbar = () => {
             transition={{ staggerChildren: 0.3, delayChildren: 0.2 }}
             variants={itemVariants}
           >
-            <motion.div
-              onClick={() => scrollToPosition(500)}
-              variants={itemVariants}
-              className="cursor-pointer group flex flex-col items-center justify-center px-2"
-            >
-              <p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
-                About
-              </p>
+            <div className="hidden xl:flex lg:flex items-center justify-center space-x-6">
+              {navLinks.map((item, index) => (
+                <div key={index} className="flex items-center justify-center">
+                  <motion.div
+                    variants={itemVariants}
+                    onClick={() => scrollToPosition(item.pos)}
+                    className="cursor-pointer group flex flex-col items-center"
+                  >
+                    <p className="text-xl text-neutral-900 group-hover:scale-105 transition-all ease-in-out duration-300">
+                      {item.name}
+                    </p>
+                    <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
+                  </motion.div>
+                  {index !== navLinks.length - 1 && (
+                    <span className="text-neutral-900 ml-6 text-xl">/</span>
+                  )}
+                </div>
+              ))}
+            </div>
 
-              <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
-            </motion.div>
+            <div className="relative xl:hidden lg:hidden md:block sm:flex items-center">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="flex items-center justify-center p-2 rounded-full hover:scale-105 transition-all duration-300"
+              >
+                {isOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
 
-            <span className="text-xl">/</span>
-
-            <motion.div
-              onClick={() => scrollToPosition(800)}
-              variants={itemVariants}
-              className="cursor-pointer group flex flex-col items-center justify-center px-2"
-            >
-              <p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
-                Education
-              </p>
-
-              <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
-            </motion.div>
-
-            <span className="text-xl">/</span>
-
-            <motion.div
-              onClick={() => scrollToPosition(1200)}
-              variants={itemVariants}
-              className="cursor-pointer group flex flex-col items-center justify-center px-2"
-            >
-              <p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
-                Skill
-              </p>
-
-              <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
-            </motion.div>
-
-            <span className="text-xl">/</span>
-
-            <motion.div
-              onClick={() => scrollToPosition(1700)}
-              variants={itemVariants}
-              className="cursor-pointer group flex flex-col items-center justify-center px-2"
-            >
-              <p className="text-xl hover:scale-105 transition-all ease-in-out duration-300">
-                Project
-              </p>
-
-              <div className="bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full origin-center w-full h-[1.5px] scale-x-0 group-hover:scale-x-100 transition-all ease-in-out duration-300" />
-            </motion.div>
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div
+                    variants={mobileMenuVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className="absolute right-0 top-full mt-2 w-[150px] bg-neutral-100 rounded-2xl shadow-xl border border-neutral-100 overflow-hidden flex flex-col py-2 px-2"
+                  >
+                    <div>
+                      {navLinks.map((item, index) => (
+                        <motion.div
+                          key={index}
+                          variants={itemVariants}
+                          onClick={() => {
+                            scrollToPosition(item.pos);
+                            setIsOpen(false);
+                          }}
+                          className="text-xl text-neutral-900 hover:bg-neutral-200/50 hover:scale-105 transition-all ease-in-out duration-300 hover:shadow-xl px-2 py-1 font-medium border-b border-neutral-200 pb-2 cursor-pointer "
+                        >
+                          {item.name}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.div>
         </div>
       </motion.div>

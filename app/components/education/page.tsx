@@ -25,19 +25,21 @@ const Education = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          <div className="flex items-center justify-center">
-            <div className="mt-15 mb-5 xl:space-x-125 lg:space-x-80 md:space-x-60 sm:space-x-40">
+          <div className="flex justify-center ">
+            <div className="w-[700px] px-25 xl:px-0 lg:px-20 md:px-30 sm:px-40">
+            <div className="mt-15 mb-5 flex items-center justify-between">
               <span>2016-2019</span>
               <span>2020-2023</span>
             </div>
           </div>
-
-          <div className="flex items-center justify-center">
-            <div className="h-[1.5px] xl:w-[800px] lg:w-[600px] md:w-[500px] sm:w-[400px] bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full" />
           </div>
 
           <div className="flex items-center justify-center">
-            <div className="flex mt-5 xl:space-x-70 lg:space-x-30 md:space-x-20 sm:space-x-10">
+            <div className="h-[1.5px] w-[400px] xl:w-[800px] lg:w-[700px] md:w-[600px] sm:w-[500px] bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full" />
+          </div>
+
+          <div className="flex items-center justify-center">
+            <div className="px-6 flex mt-5 space-x-0 xl:space-x-70 lg:space-x-60 md:space-x-40 sm:space-x-20">
               <div className="space-y-1">
                 <ul className="text-3xl mb-4">High School</ul>
                 <li>Suankularb Wittayalai Thonburi</li>

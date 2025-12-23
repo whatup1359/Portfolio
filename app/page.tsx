@@ -34,7 +34,7 @@ const HomePage = () => {
           <div className="absolute inset-0 z-10">
             <About />
           </div>
-          <div className="bg-neutral-100 w-full h-60 rounded-b-[130px]" />
+          <div className="bg-neutral-100 w-full h-90 xl:h-60 lg:h-60 md:h-70 sm:h-80 rounded-b-[130px]" />
         </div>
 
         {/* -----------Education----------- */}
