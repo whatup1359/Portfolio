@@ -7,10 +7,7 @@ import { variants1, variants2 } from "../motion";
 const Education = () => {
   return (
     <>
-      <motion.div
-        id="education"
-        className="mt-20 w-full text-neutral-900"
-      >
+      <motion.div id="education" className="mt-20 w-full text-neutral-900">
         <motion.div
           variants={variants1}
           initial="hidden"
@@ -28,17 +25,19 @@ const Education = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
         >
-          <div className="flex justify-between px-150 mt-15 mb-5">
-            <span>2016-2019</span>
-            <span>2020-2023</span>
+          <div className="flex items-center justify-center">
+            <div className="mt-15 mb-5 xl:space-x-125 lg:space-x-80 md:space-x-60 sm:space-x-40">
+              <span>2016-2019</span>
+              <span>2020-2023</span>
+            </div>
           </div>
 
-          <div className="px-140">
-            <div className="h-[1.5px] bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full" />
+          <div className="flex items-center justify-center">
+            <div className="h-[1.5px] xl:w-[800px] lg:w-[600px] md:w-[500px] sm:w-[400px] bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full" />
           </div>
 
-          <div>
-            <div className="flex justify-between px-130 mt-5">
+          <div className="flex items-center justify-center">
+            <div className="flex mt-5 xl:space-x-70 lg:space-x-30 md:space-x-20 sm:space-x-10">
               <div className="space-y-1">
                 <ul className="text-3xl mb-4">High School</ul>
                 <li>Suankularb Wittayalai Thonburi</li>
