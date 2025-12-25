@@ -71,11 +71,24 @@ const mobileMenuVariants: Variants = {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const getScrollPos = (pos: {
+    sm: number;
+    md?: number;
+    lg?: number;
+    xl?: number;
+  }) => {
+    const width = window.innerWidth;
+    if (width < 640) return pos.sm;
+    if (width < 768) return pos.md ?? pos.sm;
+    if (width < 1024) return pos.lg ?? pos.md ?? pos.sm;
+    return pos.xl ?? pos.lg ?? pos.md ?? pos.sm;
+  };
+
   const navLinks = [
-    { name: "About", pos: 500 },
-    { name: "Education", pos: 800 },
-    { name: "Skill", pos: 1200 },
-    { name: "Project", pos: 1700 },
+    { name: "About", pos: { lg: 500, md: 500, sm: 500 } },
+    { name: "Education", pos: { lg: 800, md: 950, sm: 1000 } },
+    { name: "Skill", pos: { lg: 1200, md: 1400, sm: 1500 } },
+    { name: "Project", pos: { lg: 1700, md: 1950, sm: 2000 } },
   ];
 
   return (
@@ -139,7 +152,7 @@ const Navbar = () => {
                 <div key={index} className="flex items-center justify-center">
                   <motion.div
                     variants={itemVariants}
-                    onClick={() => scrollToPosition(item.pos)}
+                    onClick={() => scrollToPosition(getScrollPos(item.pos))}
                     className="cursor-pointer group flex flex-col items-center"
                   >
                     <p className="text-xl text-neutral-900 group-hover:scale-105 transition-all ease-in-out duration-300">
@@ -154,6 +167,7 @@ const Navbar = () => {
               ))}
             </div>
 
+            {/* -----------------Menu----------------- */}
             <div className="relative xl:hidden lg:hidden md:block sm:flex items-center">
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -177,7 +191,7 @@ const Navbar = () => {
                           key={index}
                           variants={itemVariants}
                           onClick={() => {
-                            scrollToPosition(item.pos);
+                            scrollToPosition(getScrollPos(item.pos));
                             setIsOpen(false);
                           }}
                           className="text-xl text-neutral-900 hover:bg-neutral-200/50 hover:scale-105 transition-all ease-in-out duration-300 hover:shadow-xl px-2 py-1 font-medium border-b border-neutral-200 pb-2 cursor-pointer "

@@ -5,11 +5,27 @@ import {
   BriefcaseBusiness,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
+  ChevronDown,
   ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { variants1, variants2 } from "../motion";
+
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 640px)");
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  return isMobile;
+};
 
 const Project = () => {
   const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4]);
@@ -19,6 +35,8 @@ const Project = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState<any>(null);
+
+  const isMobile = useIsMobile();
 
   const handleShowModal = (img: any) => {
     setSelectedImage(img);
@@ -74,23 +92,49 @@ const Project = () => {
     },
   ];
 
-  const positions = ["center", "left1", "left", "right", "right1"];
+  const positionsX = ["center", "left1", "left", "right", "right1"];
 
-  const imageVariants1 = {
-    center: { x: "0%", scale: 1, zIndex: 5 },
-    left1: { x: "-50%", scale: 0.7, zIndex: 4 },
-    right1: { x: "50%", scale: 0.7, zIndex: 4 },
-    left: { x: "-90%", scale: 0.5, zIndex: 2 },
-    right: { x: "90%", scale: 0.5, zIndex: 1 },
+  const imageVariantsX1 = {
+    center: { x: "0%", y: 0, scale: 1, zIndex: 5 },
+    left1: { x: "-50%", y: 0, scale: 0.7, zIndex: 4 },
+    right1: { x: "50%", y: 0, scale: 0.7, zIndex: 4 },
+    left: { x: "-90%", y: 0, scale: 0.5, zIndex: 2 },
+    right: { x: "90%", y: 0, scale: 0.5, zIndex: 1 },
   };
 
-  const imageVariants2 = {
-    center: { x: "0%", scale: 1, zIndex: 5 },
-    left1: { x: "-50%", scale: 0.7, zIndex: 4 },
-    right1: { x: "50%", scale: 0.7, zIndex: 4 },
-    left: { x: "-90%", scale: 0.5, zIndex: 1 },
-    right: { x: "90%", scale: 0.5, zIndex: 2 },
+  const imageVariantsX2 = {
+    center: { x: "0%", y: 0, scale: 1, zIndex: 5 },
+    left1: { x: "-50%", y: 0, scale: 0.7, zIndex: 4 },
+    right1: { x: "50%", y: 0, scale: 0.7, zIndex: 4 },
+    left: { x: "-90%", y: 0, scale: 0.5, zIndex: 1 },
+    right: { x: "90%", y: 0, scale: 0.5, zIndex: 2 },
   };
+
+  const positionsY = ["center", "top1", "top", "bottom", "bottom1"];
+
+  const imageVariantsY1 = {
+    center: { y: "0%", x: 0, scale: 1, zIndex: 5 },
+    top1: { y: "-50%", x: 0, scale: 0.7, zIndex: 4 },
+    bottom1: { y: "50%", x: 0, scale: 0.7, zIndex: 4 },
+    top: { y: "-90%", x: 0, scale: 0.5, zIndex: 2 },
+    bottom: { y: "90%", x: 0, scale: 0.5, zIndex: 1 },
+  };
+
+  const imageVariantsY2 = {
+    center: { y: "0%", x: 0, scale: 1, zIndex: 5 },
+    top1: { y: "-50%", x: 0, scale: 0.7, zIndex: 4 },
+    bottom1: { y: "50%", x: 0, scale: 0.7, zIndex: 4 },
+    top: { y: "-90%", x: 0, scale: 0.5, zIndex: 1 },
+    bottom: { y: "90%", x: 0, scale: 0.5, zIndex: 2 },
+  };
+
+  const variants = isMobile
+    ? useVariant === "v1"
+      ? imageVariantsY1
+      : imageVariantsY2
+    : useVariant === "v1"
+    ? imageVariantsX1
+    : imageVariantsX2;
 
   const handleNext = () => {
     setUseVariant("v1");
@@ -113,7 +157,7 @@ const Project = () => {
         <motion.div
           variants={variants2}
           initial="hidden"
-          whileInView="visible"
+          animate="visible"
           viewport={{ once: true, amount: 0.1 }}
           className="absolute text-neutral-900 mb-[600px] text-4xl flex items-center justify-center"
         >
@@ -122,7 +166,9 @@ const Project = () => {
         </motion.div>
 
         {images.map((item, index) => {
-          const currentPos = positions[positionIndexes[index]];
+          const currentPos = isMobile
+            ? positionsY[positionIndexes[index]]
+            : positionsX[positionIndexes[index]];
           const isCenter = currentPos === "center";
 
           return (
@@ -130,29 +176,30 @@ const Project = () => {
               key={item.id}
               initial="center"
               whileInView={currentPos}
+              variants={variants}
               viewport={{ once: true, amount: 0.1 }}
-              variants={useVariant === "v1" ? imageVariants1 : imageVariants2}
               transition={{ duration: 1, ease: "easeOut" }}
               style={{
-                width: "40%",
+                width: isMobile ? "75%" : "40%",
                 position: "absolute",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
                 pointerEvents: isAnimating ? "none" : "auto",
               }}
             >
               <div>
                 <motion.img
-                  drag={isCenter ? "x" : false}
+                  drag={isCenter ? (isMobile ? "y" : "x") : false}
                   dragElastic={0.25}
                   dragMomentum={false}
-                  dragPropagation={false}
-                  dragConstraints={{ left: 0, right: 0 }}
+                  dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
                   onDragStart={() => setIsDragging(true)}
                   onDragEnd={(_, i) => {
-                    if (i.offset.x < -50) handleNext();
-                    else if (i.offset.x > 50) handlePrev();
+                    if (isMobile) {
+                      if (i.offset.y < -50) handleNext();
+                      else if (i.offset.y > 50) handlePrev();
+                    } else {
+                      if (i.offset.x < -50) handleNext();
+                      else if (i.offset.x > 50) handlePrev();
+                    }
                     setIsDragging(false);
                   }}
                   onAnimationStart={() => setIsAnimating(true)}
@@ -174,25 +221,26 @@ const Project = () => {
           );
         })}
 
-        <motion.div 
-        variants={variants1}
+        <motion.div
+          variants={variants1}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-        className="mt-[600px] flex items-center justify-between w-[100px]">
+          className="mt-[600px] flex flex-col xl:flex-row lg:flex-row sm:flex-row items-center justify-between w-[100px]"
+        >
           <motion.button
             whileTap={{ scale: 0.85 }}
-            onClick={handlePrev}
-            className="cursor-pointer px-2 py-4 rounded-lg hover:scale-130 transition-all duration-300"
+            onClick={isMobile ? handlePrev : handlePrev}
+            className="cursor-pointer px-2 py-1 rounded-lg hover:scale-130 transition-all duration-300"
           >
-            <ChevronLeft size={30} />
+            {isMobile ? <ChevronUp size={30} /> : <ChevronLeft size={30} />}
           </motion.button>
           <motion.button
             whileTap={{ scale: 0.85 }}
-            onClick={handleNext}
-            className="cursor-pointer px-2 py-4 rounded-lg hover:scale-130 transition-all duration-300"
+            onClick={isMobile ? handleNext : handleNext}
+            className="cursor-pointer px-2 py-1 rounded-lg hover:scale-130 transition-all duration-300"
           >
-            <ChevronRight size={30} />
+            {isMobile ? <ChevronDown size={30} /> : <ChevronRight size={30} />}
           </motion.button>
         </motion.div>
       </div>

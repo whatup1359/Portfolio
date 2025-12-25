@@ -17,15 +17,12 @@ const HomeButton = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > scrollThreshold) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > scrollThreshold);
     };
 
-    window.addEventListener("scroll", toggleVisibility);
+    toggleVisibility();
 
+    window.addEventListener("scroll", toggleVisibility);
     return () => {
       window.removeEventListener("scroll", toggleVisibility);
     };
@@ -39,7 +36,7 @@ const HomeButton = () => {
     <>
       <div
         className={`fixed bottom-20 right-10 z-45 transition-all duration-600 ease-in-out ${transitionClasses} ${
-          !isVisible ? "invisible" : ""
+          !isVisible ? "" : ""
         }`}
       >
         <p

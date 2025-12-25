@@ -21,14 +21,13 @@ const Home = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="w-50 h-50 rounded-full"
+          className="relative w-50 h-50 rounded-full overflow-hidden flex items-center justify-center "
         >
           <Image
-            src={"/profile.jpg"}
+            src={"/profile1.png"}
             alt="profile"
-            width={150}
-            height={150}
-            className="rounded-full flex items-center justify-center w-full h-full border-6 border-neutral-100"
+            fill
+            className="rounded-full border-6 border-neutral-100 object-cover object-[50%_30%]"
           />
         </motion.div>
 
