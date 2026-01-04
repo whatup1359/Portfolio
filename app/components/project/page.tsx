@@ -88,7 +88,7 @@ const Project = () => {
       name: "Go Ecommerce",
       src: "/ports/p-4.png",
       des: "NextJS + Golang(Fiber) + PostgreSQL",
-      web: "https://next-frontend-ecom-p0z4.onrender.com/",
+      web: "https://next-frontend-ecom.vercel.app/",
     },
   ];
 
