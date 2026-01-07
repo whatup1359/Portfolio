@@ -64,7 +64,7 @@ const Education = () => {
               <div className="space-y-1">
                 <ul className="text-3xl pb-4">Bachelor's Degree</ul>
                 <li>Kasetsart University Bangkhen</li>
-                <li>Bachelor of Social Science in Geography</li>
+                <li>Bachelor of Science in Geography</li>
                 <li>TOEIC: 730</li>
               </div>
             </div>
