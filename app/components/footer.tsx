@@ -8,8 +8,7 @@ const Footer = () => {
         <div className="space-y-2 xl:space-y-0 lg:space-y-0 md:space-y-0 pt-10 flex flex-col xl:flex-row lg:flex-row md:flex-row items-center justify-between">
           <p>© 2025 WutDEV All rights reserved.</p>
           <div className="flex gap-x-8">
-            <p>Terms and Conditions</p>
-            <p>Privacy Policy</p>
+            <p>Built with Next.js + TailwindCSS</p>
           </div>
         </div>
       </div>
