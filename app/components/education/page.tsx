@@ -1,77 +1,57 @@
 "use client";
 
 import { GraduationCap } from "lucide-react";
-import { motion } from "framer-motion";
-import { variants1, variants2 } from "../motion";
+import { Reveal, SectionHeading } from "../ui";
+
+const items = [
+  {
+    period: "2016 — 2019",
+    title: "High School",
+    place: "Suankularb Wittayalai Thonburi",
+    details: ["Arts — Japanese Program"],
+  },
+  {
+    period: "2020 — 2023",
+    title: "Bachelor's Degree",
+    place: "Kasetsart University, Bangkhen",
+    details: ["B.Sc. in Geography", "TOEIC: 730"],
+  },
+];
 
 const Education = () => {
   return (
-    <>
-      <motion.div id="education" className="mt-20 w-full text-neutral-900">
-        <motion.div
-          variants={variants1}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="text-4xl flex items-center justify-center"
-        >
-          <p>Education</p>
-          <GraduationCap size={50} className="ml-4" />
-        </motion.div>
+    <section id="education" className="scroll-mt-24 py-24 sm:py-28">
+      <SectionHeading index="02" title="Education" Icon={GraduationCap} />
 
-        <motion.div
-          variants={variants2}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="flex flex-col items-center justify-center"
-        >
-          <div className="hidden xl:flex lg:flex md:flex items-center justify-center">
-            <div className="w-[700px] px-25 xl:px-0 lg:px-20 md:px-30 sm:px-40">
-              <div className="mt-15 mb-2 flex items-center justify-between">
-                <span>2016-2019</span>
-                <span>2020-2023</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="hidden items-center justify-center xl:flex lg:flex md:flex mt-10 xl:mt-0 lg:mt-0 md:mt-0">
-            <div className="h-[1.5px] w-[300px] xl:w-[800px] lg:w-[650px] md:w-[550px] sm:w-[400px] bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full" />
-          </div>
-
-          <div className="flex items-center justify-center">
-            <div className="flex justify-between px-6 flex-col xl:flex-row lg:flex-row md:flex-row mt-5 xl:space-x-80 lg:space-x-60 md:space-x-20 space-y-10">
-              <div className="flex flex-col xl:hidden lg:hidden md:hidden">
-                <span className="xl:hidden lg:hidden md:hidden mb-2">
-                  2016-2019
+      <div className="grid gap-6 sm:grid-cols-2">
+        {items.map((edu, i) => (
+          <Reveal key={edu.title} delay={i * 0.12}>
+            <div className="card group h-full p-7 hover:-translate-y-1 hover:border-accent/40">
+              <div className="flex items-center gap-3">
+                <span className="h-2 w-2 rounded-full bg-accent" />
+                <span className="text-xs font-medium tracking-wide text-muted">
+                  {edu.period}
                 </span>
-                <div className="h-[1.5px] xl:w-[800px] lg:w-[700px] md:w-[600px] sm:w-[400px] bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full" />
               </div>
 
-              <div className="space-y-1">
-                <ul className="text-3xl pb-4">High School</ul>
-                <li>Suankularb Wittayalai Thonburi</li>
-                <li>Arts-Japanese Program</li>
-              </div>
+              <h3 className="mt-5 text-2xl font-semibold tracking-tight">
+                {edu.title}
+              </h3>
+              <p className="mt-1 font-medium text-ink/70">{edu.place}</p>
 
-              <div className="flex flex-col xl:hidden lg:hidden md:hidden">
-                <span className="xl:hidden lg:hidden md:hidden mb-2">
-                  2020-2023
-                </span>
-                <div className="h-[1.5px] xl:w-[800px] lg:w-[700px] md:w-[600px] sm:w-[400px] bg-linear-to-r from-neutral-900 via-neutral-400 to-neutral-900 rounded-full" />
-              </div>
-
-              <div className="space-y-1">
-                <ul className="text-3xl pb-4">Bachelor's Degree</ul>
-                <li>Kasetsart University Bangkhen</li>
-                <li>Bachelor of Science in Geography</li>
-                <li>TOEIC: 730</li>
-              </div>
+              <ul className="mt-4 space-y-1.5 text-sm text-muted">
+                {edu.details.map((d) => (
+                  <li key={d} className="flex items-center gap-2">
+                    <span className="h-1 w-1 rounded-full bg-muted" />
+                    {d}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        </motion.div>
-      </motion.div>
-    </>
+          </Reveal>
+        ))}
+      </div>
+    </section>
   );
 };
 export default Education;

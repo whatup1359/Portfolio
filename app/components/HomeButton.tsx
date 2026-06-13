@@ -1,52 +1,36 @@
 "use client";
 
-import { ChevronUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-
-const scrollToPosition = (y: number) => {
-  window.scrollTo({
-    top: y,
-    behavior: "smooth",
-  });
-};
-
-const scrollThreshold = 400;
 
 const HomeButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      setIsVisible(window.scrollY > scrollThreshold);
-    };
-
-    toggleVisibility();
-
-    window.addEventListener("scroll", toggleVisibility);
-    return () => {
-      window.removeEventListener("scroll", toggleVisibility);
-    };
+    const toggle = () => setIsVisible(window.scrollY > 400);
+    toggle();
+    window.addEventListener("scroll", toggle);
+    return () => window.removeEventListener("scroll", toggle);
   }, []);
 
-  const transitionClasses = isVisible
-    ? "opacity-100 translate-y-0"
-    : "opacity-0 translate-y-4";
-
   return (
-    <>
-      <div
-        className={`fixed bottom-20 right-10 z-45 transition-all duration-600 ease-in-out ${transitionClasses} ${
-          !isVisible ? "" : ""
-        }`}
-      >
-        <p
-          onClick={() => scrollToPosition(0)}
-          className="cursor-pointer shadow-xl hover:shadow-xl flex items-center justify-center bg-neutral-900 text-white px-4 py-4 rounded-full hover:scale-105 transition-all ease-in-out duration-300"
+    <AnimatePresence>
+      {isVisible && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8, y: 12 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, y: 12 }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Back to top"
+          className="fixed bottom-8 right-6 z-40 grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-ink text-bg shadow-xl"
         >
-          <ChevronUp className="animate-bounce" />
-        </p>
-      </div>
-    </>
+          <ArrowUp size={20} />
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 };
 export default HomeButton;

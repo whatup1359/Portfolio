@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   BriefcaseBusiness,
   ChevronLeft,
@@ -8,14 +8,23 @@ import {
   ChevronUp,
   ChevronDown,
   ExternalLink,
+  X,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
-import { variants1, variants2 } from "../motion";
+import { SectionHeading } from "../ui";
+
+type Project = {
+  id: number;
+  name: string;
+  src: string;
+  des: string;
+  web: string;
+};
 
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
     const media = window.matchMedia("(max-width: 640px)");
     const update = () => setIsMobile(media.matches);
@@ -23,8 +32,73 @@ const useIsMobile = () => {
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
   }, []);
-
   return isMobile;
+};
+
+const images: Project[] = [
+  {
+    id: 1,
+    name: "W Camp",
+    src: "/ports/p-1.png",
+    des: "Next.js + TailwindCSS + Supabase",
+    web: "https://wut-camp.vercel.app/",
+  },
+  {
+    id: 2,
+    name: "Image Slider",
+    src: "/ports/p-2.png",
+    des: "Next.js + TailwindCSS",
+    web: "https://wuts-image-slider.vercel.app/",
+  },
+  {
+    id: 3,
+    name: "Scroll Animation",
+    src: "/ports/p-5.png",
+    des: "Next.js + GSAP",
+    web: "https://w-scroll-animation.vercel.app/",
+  },
+  {
+    id: 4,
+    name: "Hover Animation",
+    src: "/ports/p-3.png",
+    des: "Next.js + TailwindCSS + GSAP",
+    web: "https://wuts-hover-animation.vercel.app/",
+  },
+  {
+    id: 5,
+    name: "Go Ecommerce",
+    src: "/ports/p-4.png",
+    des: "Next.js + Golang (Fiber) + PostgreSQL",
+    web: "https://next-frontend-ecom.vercel.app/",
+  },
+];
+
+const positionsX = ["center", "left1", "left", "right", "right1"];
+const positionsY = ["center", "top1", "top", "bottom", "bottom1"];
+
+const imageVariantsX1 = {
+  center: { x: "0%", y: 0, scale: 1, zIndex: 5, opacity: 1 },
+  left1: { x: "-55%", y: 0, scale: 0.72, zIndex: 4, opacity: 0.85 },
+  right1: { x: "55%", y: 0, scale: 0.72, zIndex: 4, opacity: 0.85 },
+  left: { x: "-95%", y: 0, scale: 0.5, zIndex: 2, opacity: 0.55 },
+  right: { x: "95%", y: 0, scale: 0.5, zIndex: 1, opacity: 0.55 },
+};
+const imageVariantsX2 = {
+  ...imageVariantsX1,
+  left: { x: "-95%", y: 0, scale: 0.5, zIndex: 1, opacity: 0.55 },
+  right: { x: "95%", y: 0, scale: 0.5, zIndex: 2, opacity: 0.55 },
+};
+const imageVariantsY1 = {
+  center: { y: "0%", x: 0, scale: 1, zIndex: 5, opacity: 1 },
+  top1: { y: "-55%", x: 0, scale: 0.72, zIndex: 4, opacity: 0.85 },
+  bottom1: { y: "55%", x: 0, scale: 0.72, zIndex: 4, opacity: 0.85 },
+  top: { y: "-95%", x: 0, scale: 0.5, zIndex: 2, opacity: 0.55 },
+  bottom: { y: "95%", x: 0, scale: 0.5, zIndex: 1, opacity: 0.55 },
+};
+const imageVariantsY2 = {
+  ...imageVariantsY1,
+  top: { y: "-95%", x: 0, scale: 0.5, zIndex: 1, opacity: 0.55 },
+  bottom: { y: "95%", x: 0, scale: 0.5, zIndex: 2, opacity: 0.55 },
 };
 
 const Project = () => {
@@ -32,101 +106,9 @@ const Project = () => {
   const [useVariant, setUseVariant] = useState<"v1" | "v2">("v1");
   const [isAnimating, setIsAnimating] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-
-  const [showModal, setShowModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [selected, setSelected] = useState<Project | null>(null);
 
   const isMobile = useIsMobile();
-
-  const handleShowModal = (img: any) => {
-    setSelectedImage(img);
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedImage(null);
-  };
-
-  const images: {
-    id: number;
-    name: string;
-    src: string;
-    des: string;
-    web: string;
-  }[] = [
-    {
-      id: 1,
-      name: "W Camp",
-      src: "/ports/p-1.png",
-      des: "NextJS + TailwindCSS + Supabase",
-      web: "https://wut-camp.vercel.app/",
-    },
-    {
-      id: 2,
-      name: "Image Slider",
-      src: "/ports/p-2.png",
-      des: "NextJS + TailwindCSS",
-      web: "https://wuts-image-slider.vercel.app/",
-    },
-    {
-      id: 3,
-      name: "Scroll Animation",
-      src: "/ports/p-5.png",
-      des: "NextJS + GSAP",
-      web: "https://w-scroll-animation.vercel.app/",
-    },
-    {
-      id: 4,
-      name: "Hover Animation",
-      src: "/ports/p-3.png",
-      des: "NextJS + TailwindCSS + GSAP",
-      web: "https://wuts-hover-animation.vercel.app/",
-    },
-    {
-      id: 5,
-      name: "Go Ecommerce",
-      src: "/ports/p-4.png",
-      des: "NextJS + Golang(Fiber) + PostgreSQL",
-      web: "https://next-frontend-ecom.vercel.app/",
-    },
-  ];
-
-  const positionsX = ["center", "left1", "left", "right", "right1"];
-
-  const imageVariantsX1 = {
-    center: { x: "0%", y: 0, scale: 1, zIndex: 5 },
-    left1: { x: "-50%", y: 0, scale: 0.7, zIndex: 4 },
-    right1: { x: "50%", y: 0, scale: 0.7, zIndex: 4 },
-    left: { x: "-90%", y: 0, scale: 0.5, zIndex: 2 },
-    right: { x: "90%", y: 0, scale: 0.5, zIndex: 1 },
-  };
-
-  const imageVariantsX2 = {
-    center: { x: "0%", y: 0, scale: 1, zIndex: 5 },
-    left1: { x: "-50%", y: 0, scale: 0.7, zIndex: 4 },
-    right1: { x: "50%", y: 0, scale: 0.7, zIndex: 4 },
-    left: { x: "-90%", y: 0, scale: 0.5, zIndex: 1 },
-    right: { x: "90%", y: 0, scale: 0.5, zIndex: 2 },
-  };
-
-  const positionsY = ["center", "top1", "top", "bottom", "bottom1"];
-
-  const imageVariantsY1 = {
-    center: { y: "0%", x: 0, scale: 1, zIndex: 5 },
-    top1: { y: "-50%", x: 0, scale: 0.7, zIndex: 4 },
-    bottom1: { y: "50%", x: 0, scale: 0.7, zIndex: 4 },
-    top: { y: "-90%", x: 0, scale: 0.5, zIndex: 2 },
-    bottom: { y: "90%", x: 0, scale: 0.5, zIndex: 1 },
-  };
-
-  const imageVariantsY2 = {
-    center: { y: "0%", x: 0, scale: 1, zIndex: 5 },
-    top1: { y: "-50%", x: 0, scale: 0.7, zIndex: 4 },
-    bottom1: { y: "50%", x: 0, scale: 0.7, zIndex: 4 },
-    top: { y: "-90%", x: 0, scale: 0.5, zIndex: 1 },
-    bottom: { y: "90%", x: 0, scale: 0.5, zIndex: 2 },
-  };
 
   const variants = isMobile
     ? useVariant === "v1"
@@ -140,7 +122,6 @@ const Project = () => {
     setUseVariant("v1");
     setPositionIndexes((prev) => prev.map((p) => (p + 1) % images.length));
   };
-
   const handlePrev = () => {
     setUseVariant("v2");
     setPositionIndexes((prev) =>
@@ -149,22 +130,32 @@ const Project = () => {
   };
 
   return (
-    <>
-      <div
-        id="portfolio"
-        className="flex items-center justify-center h-screen w-full z-10"
-      >
-        <motion.div
-          variants={variants2}
-          initial="hidden"
-          animate="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="absolute text-neutral-900 mb-[600px] text-4xl flex items-center justify-center"
-        >
-          <p>Project</p>
-          <BriefcaseBusiness size={45} className="ml-4" />
-        </motion.div>
+    <section
+      id="portfolio"
+      className="relative scroll-mt-24 py-24 sm:py-32"
+    >
+      {/* concrete band */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/backgrounds/concretebg2.jpg"
+          alt=""
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-bg/82 dark:bg-bg/90" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-bg to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-bg to-transparent" />
+      </div>
 
+      <div className="mx-auto max-w-6xl px-6">
+        <SectionHeading index="04" title="Projects" Icon={BriefcaseBusiness} />
+
+        <p className="-mt-8 mb-2 text-sm text-muted">
+          Drag or use the arrows — tap the front card for details.
+        </p>
+
+      {/* Carousel */}
+      <div className="relative mx-auto mt-10 flex h-[420px] w-full items-center justify-center sm:h-[460px]">
         {images.map((item, index) => {
           const currentPos = isMobile
             ? positionsY[positionIndexes[index]]
@@ -175,124 +166,131 @@ const Project = () => {
             <motion.div
               key={item.id}
               initial="center"
-              whileInView={currentPos}
+              animate={currentPos}
               variants={variants}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 1, ease: "easeOut" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               style={{
-                width: isMobile ? "75%" : "40%",
+                width: isMobile ? "72%" : "42%",
                 position: "absolute",
                 pointerEvents: isAnimating ? "none" : "auto",
               }}
             >
-              <div>
+              <div className="group relative">
                 <motion.img
                   drag={isCenter ? (isMobile ? "y" : "x") : false}
                   dragElastic={0.25}
                   dragMomentum={false}
                   dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
                   onDragStart={() => setIsDragging(true)}
-                  onDragEnd={(_, i) => {
+                  onDragEnd={(_, info) => {
                     if (isMobile) {
-                      if (i.offset.y < -50) handleNext();
-                      else if (i.offset.y > 50) handlePrev();
+                      if (info.offset.y < -50) handleNext();
+                      else if (info.offset.y > 50) handlePrev();
                     } else {
-                      if (i.offset.x < -50) handleNext();
-                      else if (i.offset.x > 50) handlePrev();
+                      if (info.offset.x < -50) handleNext();
+                      else if (info.offset.x > 50) handlePrev();
                     }
                     setIsDragging(false);
                   }}
                   onAnimationStart={() => setIsAnimating(true)}
                   onAnimationComplete={() => setIsAnimating(false)}
                   onClick={() => {
-                    if (isDragging) return;
-                    if (isAnimating) return;
-                    if (isCenter) handleShowModal(item);
+                    if (isDragging || isAnimating) return;
+                    if (isCenter) setSelected(item);
                   }}
                   src={item.src}
                   alt={item.name}
-                  className="relative cursor-grab rounded-xl shadow-2xl"
+                  className={`w-full rounded-2xl border border-[var(--color-line)] bg-surface shadow-2xl ${
+                    isCenter ? "cursor-pointer" : "cursor-grab"
+                  }`}
                 />
-                <p className="absolute top-1 -right-10 bg-neutral-900 text-neutral-100 px-4 py-1 font-semibold rounded-md rotate-30 shadow-lg select-none w-[200px] text-center text-xl mt-4 drop-shadow-xl">
-                  {item.name}
-                </p>
+
+                {isCenter && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-ink px-5 py-2 text-sm font-medium text-bg shadow-lg"
+                  >
+                    {item.name}
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           );
         })}
-
-        <motion.div
-          variants={variants1}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="mt-[600px] flex flex-col xl:flex-row lg:flex-row sm:flex-row items-center justify-between w-[100px]"
-        >
-          <motion.button
-            whileTap={{ scale: 0.85 }}
-            onClick={isMobile ? handlePrev : handlePrev}
-            className="cursor-pointer px-2 py-1 rounded-lg hover:scale-130 transition-all duration-300"
-          >
-            {isMobile ? <ChevronUp size={30} /> : <ChevronLeft size={30} />}
-          </motion.button>
-          <motion.button
-            whileTap={{ scale: 0.85 }}
-            onClick={isMobile ? handleNext : handleNext}
-            className="cursor-pointer px-2 py-1 rounded-lg hover:scale-130 transition-all duration-300"
-          >
-            {isMobile ? <ChevronDown size={30} /> : <ChevronRight size={30} />}
-          </motion.button>
-        </motion.div>
       </div>
 
-      {/* -----------Modal----------- */}
-      {showModal && (
-        <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-100"
-          onClick={handleCloseModal}
+      {/* Controls */}
+      <div className="mt-10 flex items-center justify-center gap-4">
+        <motion.button
+          whileTap={{ scale: 0.85 }}
+          onClick={handlePrev}
+          aria-label="Previous"
+          className="grid h-12 w-12 cursor-pointer place-items-center rounded-full border border-[var(--color-line)] bg-surface text-ink/70 transition-all duration-300 hover:scale-110 hover:text-accent"
         >
+          {isMobile ? <ChevronUp size={22} /> : <ChevronLeft size={22} />}
+        </motion.button>
+        <motion.button
+          whileTap={{ scale: 0.85 }}
+          onClick={handleNext}
+          aria-label="Next"
+          className="grid h-12 w-12 cursor-pointer place-items-center rounded-full border border-[var(--color-line)] bg-surface text-ink/70 transition-all duration-300 hover:scale-110 hover:text-accent"
+        >
+          {isMobile ? <ChevronDown size={22} /> : <ChevronRight size={22} />}
+        </motion.button>
+      </div>
+      </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {selected && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.4 }}
-            className="bg-neutral-100 rounded-2xl p-4 max-w-[800px] w-[90%] shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/40 p-4 backdrop-blur-md"
+            onClick={() => setSelected(null)}
           >
-            <img
-              src={selectedImage?.src}
-              className="rounded-lg object-cover shadow-xl w-full  mb-4"
-            />
-
-            <div className="mx-3">
-              <div className="flex items-center justify-between">
-                <p className="text-xl font-semibold mb-1">
-                  {selectedImage?.name}
-                </p>
-                <div className="hover:scale-110 transition-all duration-200">
-                  <Link href={selectedImage?.web} target="_blank">
-                    <ExternalLink />
-                  </Link>
-                </div>
-              </div>
-
-              <p className="text-gray-600 mb-4">{selectedImage?.des}</p>
-            </div>
-
-            <motion.button
-              whileTap={{
-                scale: 0.95,
-                transition: { type: "spring", stiffness: 500, damping: 20 },
-              }}
-              onClick={handleCloseModal}
-              className="cursor-pointer w-full bg-neutral-900 text-neutral-100 hover:scale-101 py-2 rounded-lg mt-2 transition-transform ease-in-out duration-200"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 12 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-surface shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              Close
-            </motion.button>
+              <button
+                onClick={() => setSelected(null)}
+                aria-label="Close"
+                className="absolute right-4 top-4 z-10 grid h-9 w-9 cursor-pointer place-items-center rounded-full bg-surface/80 text-ink/70 backdrop-blur transition-colors hover:text-ink"
+              >
+                <X size={18} />
+              </button>
+
+              <img
+                src={selected.src}
+                alt={selected.name}
+                className="w-full object-cover"
+              />
+
+              <div className="flex items-center justify-between gap-4 p-6">
+                <div>
+                  <h3 className="text-xl font-semibold">{selected.name}</h3>
+                  <p className="mt-1 text-sm text-muted">{selected.des}</p>
+                </div>
+                <Link
+                  href={selected.web}
+                  target="_blank"
+                  className="flex shrink-0 items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-bg transition-all duration-300 hover:scale-105"
+                >
+                  Visit <ExternalLink size={16} />
+                </Link>
+              </div>
+            </motion.div>
           </motion.div>
-        </div>
-      )}
-    </>
+        )}
+      </AnimatePresence>
+    </section>
   );
 };
 export default Project;

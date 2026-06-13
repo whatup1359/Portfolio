@@ -12,12 +12,10 @@ const ScrollProgression = () => {
   });
 
   return (
-    <>
-      <motion.div
-        style={{ scaleX }}
-        className="fixed bottom-0 left-0 right-0 h-1 bg-neutral-900 origin-left z-100"
-      />
-    </>
+    <motion.div
+      style={{ scaleX }}
+      className="fixed left-0 right-0 top-0 z-[60] h-1 origin-left bg-accent"
+    />
   );
 };
 
