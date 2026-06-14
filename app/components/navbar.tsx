@@ -65,8 +65,10 @@ const Navbar = () => {
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div
-          className={`mt-4 flex items-center justify-between rounded-2xl px-4 sm:px-5 py-3 transition-all duration-300 ${
-            scrolled ? "glass shadow-[0_10px_40px_-24px_rgba(0,0,0,0.5)]" : "bg-transparent"
+          className={`mt-4 flex items-center justify-between rounded-2xl px-4 sm:px-5 py-3 transition-colors duration-300 ${
+            scrolled
+              ? "border border-[var(--color-line)] bg-[var(--color-bg)]/90 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.5)]"
+              : "border border-transparent bg-transparent"
           }`}
         >
           {/* Logo */}

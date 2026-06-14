@@ -39,35 +39,35 @@ const images: Project[] = [
   {
     id: 1,
     name: "W Camp",
-    src: "/ports/p-1.png",
+    src: "/ports/p-1.webp",
     des: "Next.js + TailwindCSS + Supabase",
     web: "https://wut-camp.vercel.app/",
   },
   {
     id: 2,
     name: "Image Slider",
-    src: "/ports/p-2.png",
+    src: "/ports/p-2.webp",
     des: "Next.js + TailwindCSS",
     web: "https://wuts-image-slider.vercel.app/",
   },
   {
     id: 3,
     name: "Scroll Animation",
-    src: "/ports/p-5.png",
+    src: "/ports/p-5.webp",
     des: "Next.js + GSAP",
     web: "https://w-scroll-animation.vercel.app/",
   },
   {
     id: 4,
     name: "Hover Animation",
-    src: "/ports/p-3.png",
+    src: "/ports/p-3.webp",
     des: "Next.js + TailwindCSS + GSAP",
     web: "https://wuts-hover-animation.vercel.app/",
   },
   {
     id: 5,
     name: "Go Ecommerce",
-    src: "/ports/p-4.png",
+    src: "/ports/p-4.webp",
     des: "Next.js + Golang (Fiber) + PostgreSQL",
     web: "https://next-frontend-ecom.vercel.app/",
   },
@@ -137,9 +137,10 @@ const Project = () => {
       {/* concrete band */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/backgrounds/concretebg2.jpg"
+          src="/backgrounds/concrete.jpg"
           alt=""
           fill
+          sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-bg/82 dark:bg-bg/90" />
@@ -200,6 +201,8 @@ const Project = () => {
                   }}
                   src={item.src}
                   alt={item.name}
+                  loading="lazy"
+                  decoding="async"
                   className={`w-full rounded-2xl border border-[var(--color-line)] bg-surface shadow-2xl ${
                     isCenter ? "cursor-pointer" : "cursor-grab"
                   }`}

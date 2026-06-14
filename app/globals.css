@@ -63,37 +63,29 @@ body {
   width: 44rem;
   height: 44rem;
   border-radius: 9999px;
-  filter: blur(130px);
+  /* radial-gradient is already soft — no expensive filter:blur needed */
   background: radial-gradient(circle at center, #c7d2fe 0%, transparent 70%);
-  opacity: 0.28;
+  opacity: 0.3;
 }
 :root.dark .ambient::before {
   background: radial-gradient(circle at center, #312e81 0%, transparent 70%);
   opacity: 0.4;
 }
 
-/* subtle concrete grain across the whole page — adds material, fights emptiness */
+/* subtle concrete grain across the whole page — static fixed layer (cheap),
+   no blend-mode so it never re-composites with content while scrolling */
 .texture {
   position: fixed;
   inset: 0;
   z-index: -9;
   pointer-events: none;
-  background-image: url("/backgrounds/concretebg2.jpg");
+  background-image: url("/backgrounds/concrete.jpg");
   background-size: cover;
   background-position: center;
-  opacity: 0.18;
-  mix-blend-mode: multiply;
+  opacity: 0.1;
 }
 :root.dark .texture {
-  opacity: 0.14;
-  mix-blend-mode: soft-light;
-}
-
-/* concrete panel used behind the hero & projects band */
-.concrete {
-  background-image: url("/backgrounds/concretebg2.jpg");
-  background-size: cover;
-  background-position: center;
+  opacity: 0.06;
 }
 
 /* twinkling stars in the empty zones */

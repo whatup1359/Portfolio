@@ -32,10 +32,11 @@ const Home = () => {
       {/* concrete backdrop */}
       <div className="absolute inset-0 -z-10 overflow-hidden rounded-b-[3rem]">
         <Image
-          src="/backgrounds/concretebg2.jpg"
+          src="/backgrounds/concrete.jpg"
           alt=""
           fill
           priority
+          sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-bg/82 dark:bg-bg/90" />
